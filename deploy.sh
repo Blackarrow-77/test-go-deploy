@@ -14,6 +14,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
+echo "Deploying version ${version}"
 
 # Init github repository inside deploy folder
 rm -rf "${deploy_directory}"
@@ -38,3 +39,5 @@ git push --force
 # Create tag and push
 git tag "${version}" master
 git push origin "${version}"
+
+echo "Finished to deploy version ${version}"
