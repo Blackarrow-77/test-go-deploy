@@ -12,7 +12,7 @@ rm -rf "${deploy_directory}"
 # Clone git and get version
 git clone "git@github.com:${github_account_name}/${deploy_directory}.git"
 cd ${deploy_directory}
-version=$(echo $(git describe --tags) | awk -F. -v OFS=. '{$NF++;print}')
+version=$(echo $(git describe --tags) | perl -ne 'chomp; print join(".", splice(@{[split/\./,$_]}, 0, -1), map {++$_} pop @{[split/\./,$_]}), "\n";')
 while [ "$1" != "" ]; do
     case $1 in
     -v | --version)
