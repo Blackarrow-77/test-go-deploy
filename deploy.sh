@@ -44,4 +44,8 @@ git push --force
 git tag "${version}" master
 git push origin "${version}"
 
+# Remove deploy folder
+cd ../
+rm -rf "${deploy_directory}"
+
 echo "Finished to deploy version ${version}"
