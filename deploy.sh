@@ -25,7 +25,7 @@ cd ../
 rm -rf "${deploy_directory}"/*
 
 # Copy needed files for deploy into a directory
-tar cvf deploy.tar --exclude="${deploy_directory}" *
+tar cvf deploy.tar --exclude="${deploy_directory}, .ssh" *
 mv deploy.tar "${deploy_directory}"/deploy.tar
 cd "${deploy_directory}"
 tar xvf deploy.tar
