@@ -3,7 +3,17 @@
 
 deploy_directory="test-go-deploy"
 github_account_name="Blackarrow-77"
-version="2.0.5"
+
+version = $(echo $(git describe --tags) | awk -F. -v OFS=. '{$NF++;print}')
+while [ "$1" != "" ]; do
+    case $1 in
+    -v | --version)
+        version=$2
+        ;;
+    esac
+    shift
+done
+
 
 # Init github repository inside deploy folder
 rm -rf "${deploy_directory}"
@@ -25,6 +35,6 @@ git add *
 git commit -m "Version ${version}"
 git push --force
 
-# Tag files
+# Create tag and push
 git tag "${version}" master
 git push origin "${version}"
