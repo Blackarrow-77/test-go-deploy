@@ -4,6 +4,13 @@
 deploy_directory="test-go-deploy"
 github_account_name="Blackarrow-77"
 
+
+echo "Prepare for deployment"
+# Init github repository inside deploy folder
+rm -rf "${deploy_directory}"
+
+# Clone git and get version
+git clone "git@github.com:${github_account_name}/${deploy_directory}.git"
 version=$(echo $(git describe --tags) | awk -F. -v OFS=. '{$NF++;print}')
 while [ "$1" != "" ]; do
     case $1 in
@@ -14,12 +21,6 @@ while [ "$1" != "" ]; do
     shift
 done
 
-echo "Deploying version ${version}"
-
-# Init github repository inside deploy folder
-rm -rf "${deploy_directory}"
-
-git clone "git@github.com:${github_account_name}/${deploy_directory}.git"
 rm -rf "${deploy_directory}"/*
 
 # Copy needed files for deploy into a directory
@@ -30,6 +31,8 @@ tar xvf deploy.tar
 rm deploy.tar
 find . -name "*test*" -type f -delete
 rm -rf *test*
+
+echo "Deploying version ${version}"
 
 # Commit and push new files
 git add *
