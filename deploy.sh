@@ -11,6 +11,7 @@ rm -rf "${deploy_directory}"
 
 # Clone git and get version
 git clone "git@github.com:${github_account_name}/${deploy_directory}.git"
+cd ${deploy_directory}
 version=$(echo $(git describe --tags) | awk -F. -v OFS=. '{$NF++;print}')
 while [ "$1" != "" ]; do
     case $1 in
@@ -20,7 +21,7 @@ while [ "$1" != "" ]; do
     esac
     shift
 done
-
+cd ../
 rm -rf "${deploy_directory}"/*
 
 # Copy needed files for deploy into a directory
