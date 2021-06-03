@@ -23,5 +23,8 @@ rm -rf *test*
 # Commit and push new files
 git add *
 git commit -m "Version ${version}"
-git tag "${version}" master
 git push --force
+
+# Tag files
+git tag "${version}" master
+git push origin "${version}"
