@@ -25,10 +25,10 @@ cd ../
 rm -rf "${deploy_directory}"/*
 
 # Copy needed files for deploy into a directory
-tar cvf deploy.tar --exclude="${deploy_directory}, .ssh" *
+tar cf deploy.tar --exclude="${deploy_directory}" *
 mv deploy.tar "${deploy_directory}"/deploy.tar
 cd "${deploy_directory}"
-tar xvf deploy.tar
+tar xf deploy.tar
 rm deploy.tar
 find . -name "*test*" -type f -delete
 rm -rf *test*
