@@ -4,7 +4,7 @@
 deploy_directory="test-go-deploy"
 github_account_name="Blackarrow-77"
 
-version = $(echo $(git describe --tags) | awk -F. -v OFS=. '{$NF++;print}')
+version=$(echo $(git describe --tags) | awk -F. -v OFS=. '{$NF++;print}')
 while [ "$1" != "" ]; do
     case $1 in
     -v | --version)
